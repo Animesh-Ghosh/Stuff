@@ -31,20 +31,20 @@ NODE* Insert_Node (NODE *root, int& data) {
 }
 
 // traverse tree
-void Traverse (NODE *root) {
+void InOrder (NODE *root) {	// inorder traversal
 	 // made this on the first try!!! BOI!!!
-	 NODE *cur = root;
-	 if (cur->left != NULL) Traverse (cur->left);
-	 cout<<cur->data<<" ";
-	 if (cur->right != NULL) Traverse (cur->right);
+	 if (root->left != NULL) InOrder (root->left);
+	 cout<<root->data<<" ";
+	 if (root->right != NULL) InOrder (root->right);
 }
-void preorder(NODE*root){
+void PreOrder (NODE *root) { // preorder traversal. Thanks to BHups!
 	//NODE*cur=root;
-	if(root==NULL)	return;
+	if (root == NULL) return;
 	cout<<root->data<<" ";
-	preorder(root->left);
-	preorder(root->right);
+	PreOrder (root->left);
+	PreOrder (root->right);
 }
+
 // main
 int main () {
 	NODE *root = NULL;
@@ -57,15 +57,10 @@ int main () {
 		cin>>data;
 		root = Insert_Node (root, data);
 	}
-	/*
-	cout<<"Level 0:\t"<<root->data<<endl;
-	cout<<"Level 1:\t"<<root->left->data<<"\t"<<root->right->data<<endl;
-	cout<<"Level 2:\t"<<root->left->right->data<<"\t"<<root->right->left->data<<endl;
-	cout<<"Level 3:\t"<<root->right->left->right->data<<endl;
-	*/
-	cout<<"Tree in INORDER traversal: "<<endl;
+
+	cout<<"Tree in IN-ORDER traversal: "<<endl;
 	Traverse (root);
 	cout<<"\nTree in PRE-ORDER traversal: "<<endl;
-	preorder (root);
+	PreOrder (root);
 	return 0;
 }
