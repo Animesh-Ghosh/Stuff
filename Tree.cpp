@@ -38,7 +38,13 @@ void Traverse (NODE *root) {
 	 cout<<cur->data<<" ";
 	 if (cur->right != NULL) Traverse (cur->right);
 }
-
+void preorder(NODE*root){
+	//NODE*cur=root;
+	if(root==NULL)	return;
+	cout<<root->data<<" ";
+	preorder(root->left);
+	preorder(root->right);
+}
 // main
 int main () {
 	NODE *root = NULL;
@@ -59,5 +65,7 @@ int main () {
 	*/
 	cout<<"Tree in INORDER traversal: "<<endl;
 	Traverse (root);
+	cout<<"\nTree in PRE-ORDER traversal: "<<endl;
+	preorder (root);
 	return 0;
 }
