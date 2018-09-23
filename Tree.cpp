@@ -59,7 +59,7 @@ int main () {
 	}
 
 	cout<<"Tree in IN-ORDER traversal: "<<endl;
-	Traverse (root);
+	InOrder (root);
 	cout<<"\nTree in PRE-ORDER traversal: "<<endl;
 	PreOrder (root);
 	return 0;
