@@ -30,37 +30,67 @@ NODE* Insert_Node (NODE *root, int& data) {
 	}
 }
 
+// delete function
+/* NODE* Delete_Node (NODE *root, int& data) {
+	// do something
+} */
+
 // traverse tree
-void InOrder (NODE *root) {	// inorder traversal
-	 // made this on the first try!!! BOI!!!
+// inorder traversal. made this on the first try!!! BOI!!!
+void InOrder (NODE *root) {	
 	 if (root->left != NULL) InOrder (root->left);
-	 cout<<root->data<<" ";
+	 cout << root->data << " ";
 	 if (root->right != NULL) InOrder (root->right);
 }
-void PreOrder (NODE *root) { // preorder traversal. Thanks to BHups!
-	//NODE*cur=root;
+
+// preorder traversal. Thanks to BHups!
+void PreOrder (NODE *root) { 
 	if (root == NULL) return;
-	cout<<root->data<<" ";
+	cout << root->data << " ";
 	PreOrder (root->left);
 	PreOrder (root->right);
 }
 
+// search function
+// sub-function for searching
+int Exists (NODE *root, int& data) { 
+	if (root->data == data) {
+		return 1;
+	}
+	else {
+		if (root->left != NULL) Exists (root->left, data);
+		if (root->right != NULL) Exists (root->right, data);
+	}
+}
+
+// searching using Exists function
+void Search (NODE *root, int& data) { 
+	int flag = 0;
+	flag = Exists (root, data);
+	if (flag != 0) cout << data << " found!" << endl;
+	else cout << data << " not found!" << endl;
+}
+
+
 // main
 int main () {
 	NODE *root = NULL;
-	//int datum[] = {2, 0, 1, 5, 3, 4}; //sample input: 2, 0, 1, 5, 3, 4
+	//int datum[] = {2, 0, 1, 5, 3, 4};
 	int N, data;
-	cout<<"Enter number of elements to be inserted: ";
-	cin>>N;
-	for (int i = 0; i < N ; i++) {
-		cout<<"Enter data element: ";
-		cin>>data;
+	cout << "Enter number of elements to be inserted: ";
+	cin >> N;
+	for (int i = 0; i < N ; i++) { //sample input: 2, 0, 1, 5, 3, 4
+		cout << "Enter data element: ";
+		cin >> data;
 		root = Insert_Node (root, data);
 	}
 
-	cout<<"Tree in IN-ORDER traversal: "<<endl;
+	cout << "Tree in IN-ORDER traversal: " << endl;
 	InOrder (root);
-	cout<<"\nTree in PRE-ORDER traversal: "<<endl;
+	cout << "\nTree in PRE-ORDER traversal: " << endl;
 	PreOrder (root);
+	cout << "\nEnter element to be searched: ";
+	cin >> data;
+ 	Search (root, data);
 	return 0;
 }
