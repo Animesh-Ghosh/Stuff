@@ -39,7 +39,7 @@ NODE* Delete_Node (NODE *root, int& data) {
 void InOrder (NODE *root) {	// inorder traversal
 	 // made this on the first try!!! BOI!!!
 	 if (root->left != NULL) InOrder (root->left);
-	 cout << root->data<<" ";
+	 cout << root->data << " ";
 	 if (root->right != NULL) InOrder (root->right);
 }
 
@@ -52,10 +52,8 @@ void PreOrder (NODE *root) { // preorder traversal. Thanks to BHups!
 }
 
 // search function
-int Exists (NODE *root, int& data) {
-	// do something
+int Exists (NODE *root, int& data) { // sub-function for searching
 	if (root->data == data) {
-		// cout << "Element found!" << endl;
 		return 1;
 	}
 	else {
