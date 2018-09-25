@@ -53,7 +53,7 @@ int detA(int **A, int n) {
 	delete M;
 }
 
-void Minor(int **A, int **M, int I, int J, int& n) {
+void Minor(int **A, int **M, int I, int J, int &n) {
 	int i, j, k = 0, l = 0;
 	for (i = 0; i < n; i++) {
 		if (i != I) {
