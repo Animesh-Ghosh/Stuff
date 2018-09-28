@@ -1,4 +1,5 @@
 # include <iostream>
+# include <stdlib.h>
 
 //didn't use whole std namespace since the build would become bulkier
 //using namespace std;
@@ -71,12 +72,62 @@ void Search (NODE *root, int& data) {
 	else cout << data << " not found!" << endl;
 }
 
-
+NODE * minValueNode(NODE* node) 
+{ 
+    NODE* current = node; 
+    /* loop down to find the leftmost leaf */
+    while (current->left != NULL) 
+        current = current->left; 
+  
+    return current; 
+} 
+NODE* DeleteNode(NODE* root, int data) 
+{ 
+    if (root == NULL) return root; 
+  
+    // If the data to be deleted is smaller than the root's data, 
+    // then it lies in left subtree 
+    if (data < root->data) 
+        root->left = DeleteNode(root->left,data); 
+  
+    else if (data > root->data) 
+        root->right = DeleteNode(root->right, data);   
+        
+    /* if data is same as root's data, then This is the node 
+    to be deleted */
+    else
+    { 
+        // node with only one child or no child 
+        if (root->left == NULL) 
+        { 
+            NODE *temp = root->right; 
+            free(root); 
+            return temp; 
+        } 
+        else if (root->right == NULL) 
+        { 
+            NODE *temp = root->left; 
+            free(root); 
+            return temp; 
+        } 
+  
+        /* node with two children: Get the inorder successor (smallest 
+         in the right subtree) */ 
+        NODE* temp = minValueNode(root->right); 
+  
+        // Copy the inorder successor's content to this node 
+        root->data = temp->data; 
+  
+        // Delete the inorder successor 
+        root->right = DeleteNode(root->right, temp->data); 
+    } 
+    return root; 
+} 
 // main
 int main () {
 	NODE *root = NULL;
 	//int datum[] = {2, 0, 1, 5, 3, 4};
-	int N, data;
+	int d, N, data;
 	cout << "Enter number of elements to be inserted: ";
 	cin >> N;
 	for (int i = 0; i < N ; i++) { //sample input: 2, 0, 1, 5, 3, 4
@@ -92,5 +143,10 @@ int main () {
 	cout << "\nEnter element to be searched: ";
 	cin >> data;
  	Search (root, data);
+ 	cout<<"\nEnter Data to delete : ";
+ 	cin>>d;
+    root = DeleteNode(root, d); 
+    printf("Inorder traversal of the modified tree \n"); 
+    InOrder(root); 
 	return 0;
 }
