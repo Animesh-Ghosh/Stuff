@@ -57,9 +57,14 @@ int Exists (NODE *root, int& data) {
 	if (root->data == data) {
 		return 1;
 	}
-	else {
-		if (root->left != NULL) Exists (root->left, data);
-		if (root->right != NULL) Exists (root->right, data);
+	else if (root->data < data && root->right != NULL){
+		Exists (root->right, data);
+	}
+	else if (root->data > data && root->left != NULL){
+		Exists (root->left, data);
+	}
+	else{
+		return 0;
 	}
 }
 
