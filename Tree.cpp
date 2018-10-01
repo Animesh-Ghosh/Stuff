@@ -52,7 +52,7 @@ void PreOrder (NODE *root) {
 }
 
 // search function
-// sub-function for searching
+// sub-function for searching. Ganesh bhaiya tested and corrected the function; thanks!
 int Exists (NODE *root, int& data) { 
 	if (root->data == data) return 1;
 	else if (root->data < data && root->right != NULL) Exists (root->right, data);
