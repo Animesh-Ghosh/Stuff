@@ -119,7 +119,7 @@ void Tree () {
 				 break;
 			case '4': cout << "Exiting..." << endl;
 				 exit (1);
-			default: cout << "Invalid input!" << endl;
+			default: cout << "Invalid input!";
 		}
 		cout << "\nContinue? (Y/N): ";
 		cin >> ans;
