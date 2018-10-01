@@ -1,4 +1,5 @@
 # include <iostream>
+# include <process.h>
 
 //didn't use whole std namespace since the build would become bulkier
 //using namespace std;
@@ -15,7 +16,7 @@ struct NODE {
 
 // insert function
 // got help from a person on the internet! thank you Discord!
-NODE* Insert_Node (NODE *root, int& data) {
+NODE* Insert (NODE *root, int& data) {
 	if (root == NULL) {
 		root = new NODE;
 		root->data = data;
@@ -23,71 +24,108 @@ NODE* Insert_Node (NODE *root, int& data) {
 		return root;
 	}
 	else if (data < root->data) {
-		root->left = Insert_Node (root->left, data);
+		root->left = Insert (root->left, data);
 	}
 	else if (root->data < data) {
-		root->right = Insert_Node (root->right, data);
+		root->right = Insert (root->right, data);
 	}
 }
 
 // delete function
-/* NODE* Delete_Node (NODE *root, int& data) {
+NODE* Delete (NODE *root, int& data) {
 	// do something
-} */
+}
 
 // traverse tree
-// inorder traversal. made this on the first try!!! BOI!!!
-void InOrder (NODE *root) {	
+void InOrder (NODE *root) {	// inorder traversal
+	 // made this on the first try!!! BOI!!!
 	 if (root->left != NULL) InOrder (root->left);
 	 cout << root->data << " ";
 	 if (root->right != NULL) InOrder (root->right);
 }
 
-// preorder traversal. Thanks to BHups!
-void PreOrder (NODE *root) { 
-	if (root == NULL) return;
+void PreOrder (NODE *root) { // preorder traversal. Thanks to BHups!
+	// if (root == NULL) return;
 	cout << root->data << " ";
-	PreOrder (root->left);
-	PreOrder (root->right);
+	if (root->left != NULL) PreOrder (root->left);
+	if (root->right != NULL) PreOrder (root->right);
 }
 
 // search function
-// sub-function for searching. Ganesh bhaiya tested and corrected the function; thanks!
-int Exists (NODE *root, int& data) { 
+int Exists (NODE *root, int& data) { // sub-function for searching
 	if (root->data == data) return 1;
-	else if (root->data < data && root->right != NULL) Exists (root->right, data);
-	else if (root->data > data && root->left != NULL) Exists (root->left, data);
+	else if ((data < root->data) && (root->left != NULL)) Exists (root->left, data);
+	else if ((root->data < data) && (root->right != NULL)) Exists (root->right, data);
 	else return 0;
 }
 
-// searching using Exists function
-void Search (NODE *root, int& data) { 
-	int flag = 0;
-	flag = Exists (root, data);
-	if (flag != 0) cout << data << " found!" << endl;
-	else cout << data << " not found!" << endl;
+void Search (NODE *root, int& data) { // using Exists function
+	if (!Exists (root, data)) cout << data << " not found!";
+	else cout << data << " found!";
 }
 
-
-// main
-int main () {
-	NODE *root = NULL;
-	//int datum[] = {2, 0, 1, 5, 3, 4};
+// creating the tree
+NODE* Create (NODE *root) {
 	int N, data;
 	cout << "Enter number of elements to be inserted: ";
 	cin >> N;
-	for (int i = 0; i < N ; i++) { //sample input: 2, 0, 1, 5, 3, 4
-		cout << "Enter data element: ";
+	cout << "Enter elements: ";
+	for (int i = 0; i < N ; i++) {
 		cin >> data;
-		root = Insert_Node (root, data);
+		root = Insert (root, data);
 	}
-
 	cout << "Tree in IN-ORDER traversal: " << endl;
 	InOrder (root);
-	cout << "\nTree in PRE-ORDER traversal: " << endl;
-	PreOrder (root);
-	cout << "\nEnter element to be searched: ";
-	cin >> data;
- 	Search (root, data);
+	return root;
+}
+
+// Tree function
+void Tree () {
+	NODE *root = NULL;
+	char ans = 'Y';
+	short ch;
+	int data;
+	cout << "Create Tree: " << endl;
+	root = Create (root);
+	do {
+		system ("cls");
+		cout << "1.Insert\n2.Search\n3.Display\n4.Exit\n";
+		cout << "Enter choice: ";
+		cin >> ch;
+		switch (ch) {
+			case 1: cout << "Enter data: ";
+				 cin >> data;
+				 root = Insert (root, data);
+				 cout << "Data element inserted!";
+				 break;
+			case 2: cout << "Enter data to be searched: ";
+				 cin >> data;
+				 Search (root, data);
+				 break;
+			case 3: cout << "1.Pre-Order\n2.In-Order\n";
+				 cout << "Enter choice: ";
+				 cin >> ch;
+				 switch (ch) {
+				 		case 1: cout << "Tree in PRE-ORDER traversal: " << endl;
+						 	 PreOrder (root);
+				 		 	 break;
+						  case 2: cout << "Tree in IN-ORDER traversal: " << endl;
+						  	   InOrder (root);
+						  	   break;
+		  	   default: cout << "Invalid input!";
+				 }
+				 break;
+			case 4: cout << "Exiting..." << endl;
+				 exit (1);
+			default: cout << "Invalid input!" << endl;
+		}
+		cout << "\nContinue? (Y/N): ";
+		cin >> ans;
+	}while (ans == 'Y' || ans == 'y');
+}
+
+// main
+int main () {
+	Tree (); // call to main
 	return 0;
 }
