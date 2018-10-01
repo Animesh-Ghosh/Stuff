@@ -37,29 +37,32 @@ NODE* Delete (NODE *root, int& data) {
 }
 
 // traverse tree
-void InOrder (NODE *root) {	// inorder traversal
-	 // made this on the first try!!! BOI!!!
+// inorder traversal
+// made this on the first try!!! BOI!!!
+void InOrder (NODE *root) {
 	 if (root->left != NULL) InOrder (root->left);
 	 cout << root->data << " ";
 	 if (root->right != NULL) InOrder (root->right);
 }
 
-void PreOrder (NODE *root) { // preorder traversal. Thanks to BHups!
-	// if (root == NULL) return;
+// preorder traversal. Thanks to BHups!
+void PreOrder (NODE *root) { 
 	cout << root->data << " ";
 	if (root->left != NULL) PreOrder (root->left);
 	if (root->right != NULL) PreOrder (root->right);
 }
 
 // search function
-int Exists (NODE *root, int& data) { // sub-function for searching
+// sub-function for searching
+int Exists (NODE *root, int& data) { 
 	if (root->data == data) return 1;
 	else if ((data < root->data) && (root->left != NULL)) Exists (root->left, data);
 	else if ((root->data < data) && (root->right != NULL)) Exists (root->right, data);
 	else return 0;
 }
 
-void Search (NODE *root, int& data) { // using Exists function
+// using Exists function
+void Search (NODE *root, int& data) { 
 	if (!Exists (root, data)) cout << data << " not found!";
 	else cout << data << " found!";
 }
@@ -82,8 +85,7 @@ NODE* Create (NODE *root) {
 // Tree function
 void Tree () {
 	NODE *root = NULL;
-	char ans = 'Y';
-	short ch;
+	char ans = 'Y', ch;
 	int data;
 	cout << "Create Tree: " << endl;
 	root = Create (root);
@@ -93,29 +95,29 @@ void Tree () {
 		cout << "Enter choice: ";
 		cin >> ch;
 		switch (ch) {
-			case 1: cout << "Enter data: ";
+			case '1': cout << "Enter data: ";
 				 cin >> data;
 				 root = Insert (root, data);
 				 cout << "Data element inserted!";
 				 break;
-			case 2: cout << "Enter data to be searched: ";
+			case '2': cout << "Enter data to be searched: ";
 				 cin >> data;
 				 Search (root, data);
 				 break;
-			case 3: cout << "1.Pre-Order\n2.In-Order\n";
+			case '3': cout << "1.Pre-Order\n2.In-Order\n";
 				 cout << "Enter choice: ";
 				 cin >> ch;
 				 switch (ch) {
-				 		case 1: cout << "Tree in PRE-ORDER traversal: " << endl;
-						 	 PreOrder (root);
-				 		 	 break;
-						  case 2: cout << "Tree in IN-ORDER traversal: " << endl;
-						  	   InOrder (root);
-						  	   break;
-		  	   default: cout << "Invalid input!";
+				 	case '1': cout << "Tree in PRE-ORDER traversal: " << endl;
+						 PreOrder (root);
+				 		 break;
+					case '2': cout << "Tree in IN-ORDER traversal: " << endl;
+						InOrder (root);
+						break;
+		  	   		default: cout << "Invalid input!";
 				 }
 				 break;
-			case 4: cout << "Exiting..." << endl;
+			case '4': cout << "Exiting..." << endl;
 				 exit (1);
 			default: cout << "Invalid input!" << endl;
 		}
