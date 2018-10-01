@@ -1,5 +1,5 @@
 # include <iostream>
-# include <process.h>
+# include <process.h> // for exit ()
 
 //didn't use whole std namespace since the build would become bulkier
 //using namespace std;
