@@ -68,24 +68,32 @@ void Generate (int Sieve[], int List[], int N, int &prime) {
 
 void Prime (int &N) {
 	int *List = new int[N + 1];
-	int i;
 	Generate (List, (N + 1));
 	int prime = List[2];
 	Show (List, (N + 1), prime);
-	Mark (List, (N + 1), prime);
-	Show (List, (N + 1), prime);
-	int count = 0;
-	count = zeroCount (List, (N + 1), prime);
-	cout << "Zero-element count: " << count << endl;
-	int *Sieve = new int[N - 1 - count];
-	Generate (Sieve, List, (N + 1), prime);
-	Show (Sieve, (N - 1 - count), 0);
-	if (BinSearch (N, Sieve, (N + 1))) cout << N << " in list!" << endl;
-	else cout << N << " not in list!" << endl;
-	cout << "Current prime: " << prime << endl;
-	prime = Sieve[1];
-	cout << "New prime: " << prime << endl;
-	delete []Sieve;
+	do {
+		Mark (List, (N + 1), prime);
+		Show (List, (N + 1), prime);
+		int count = 0;
+		count = zeroCount (List, (N + 1), prime);
+		cout << "Zero-element count: " << count << endl;
+		int *Sieve = new int[N - 1 - count];
+		Generate (Sieve, List, (N + 1), prime);
+		Show (Sieve, (N - 1 - count), 0);
+		if (BinSearch (N, Sieve, (N + 1))) {
+			cout << N << " possibly prime!" << endl;
+			cout << "Current prime: " << prime << endl;
+			prime = Sieve[1];
+			cout << "New prime: " << prime << endl;
+			delete []Sieve;
+		}
+		else {
+			cout << N << " not prime!" << endl;
+			delete []Sieve;
+			break;
+		}
+	}while (prime != N);
+	if (prime == N) cout << N << " is prime!" << endl;
 }
 
 int main () {
