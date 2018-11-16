@@ -5,7 +5,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-/*
+/*Eratosthenes' sieve algorithm from https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 1. Create a list of consecutive integers from 2 through n: (2, 3, 4, ..., n).
 2. Initially, let p equal 2, the smallest prime number.
 3. Enumerate the multiples of p by counting to n from 2p in increments of p, and mark them in the list 
