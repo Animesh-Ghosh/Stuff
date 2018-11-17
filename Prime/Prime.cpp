@@ -71,7 +71,7 @@ void Prime (int &N) {
 		int *Sieve = new int[count];
 		Generate (Sieve, List, (N + 1), prime);
 		Show (Sieve, count, 0);
-		if (BinSearch (N, Sieve, (count))) {
+		if (BinSearch (N, Sieve, count)) {
 			cout << N << " possibly prime!" << endl;
 			cout << "Current prime: " << prime << endl;
 			prime = Sieve[1];
