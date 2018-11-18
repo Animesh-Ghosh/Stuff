@@ -36,7 +36,7 @@ int main() {
 		{
 			if(i==1) continue;
 			if(primality(i))
-			printf("%d \n",i);
+			printf("%d ",i);
 		}
 	}
 	printf("\n");
