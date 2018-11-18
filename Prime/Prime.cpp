@@ -84,6 +84,7 @@ void Prime (int &N) {
 			break;
 		}
 	}while (prime != N);
+	delete []List;
 	if (prime == N) cout << N << " is prime!" << endl;
 	else cout << N << " is not prime!" << endl;
 }
