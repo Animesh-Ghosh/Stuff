@@ -33,8 +33,16 @@ void Show (int List[], int N, int prime) {
 
 void Mark (int List[], int N, int &prime) {
 	cout << "Marking multiples of " << prime << ": " << endl;
-	for (int i = prime * prime; i < N; i += prime) 
-		if (List[i] % prime == 0) List[i] = 0;
+	int i = prime * prime;
+	if (i < 0) {
+		for (i = prime; i < N; i += prime) 
+			if (i == prime) continue;
+			else if (List[i] % prime == 0) List[i] = 0;
+	}
+	else {
+		for (; i < N; i += prime) 
+			if (List[i] % prime == 0) List[i] = 0;
+	}
 }
 
 int nonZeroCount (int List[], int N, int &prime) {
