@@ -1,5 +1,6 @@
 # include <iostream>
 # include <conio.h>
+# include <math.h>
 
 using std::cin;
 using std::cout;
@@ -24,7 +25,7 @@ void Mark (int List[], int N, int &prime) {
 }
 
 int FindNextPrime (int List[], int N, int &prime) {
-	for (int i = (prime + 1); i < N; i++) 
+	for (int i = (prime + 1); i < sqrt(N); i++) 
 		if (List[i] > prime && List[i] != 0) 
 			return List[i];
 	return -1;
