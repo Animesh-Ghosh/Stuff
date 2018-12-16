@@ -30,5 +30,5 @@ int main () {
 int main() {
     srand ((unsigned) time (0));
 	int random_integer = rand ();
-	cout << random_integer << endl;
+	cout << "Random number: " << random_integer << endl;
 }
