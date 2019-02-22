@@ -1,7 +1,7 @@
-# include <stdio.h>
-# include <conio.h>
-# include <math.h>
-# define MAXSIZE 5  //size of matrix can be changed from here
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+#define MAXSIZE 5  //size of matrix can be changed from here
 
 void Enter (int A[][MAXSIZE], int);
 void Show (int A[][MAXSIZE], int);

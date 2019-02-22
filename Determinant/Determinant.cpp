@@ -1,5 +1,5 @@
-# include <iostream>
-# include <math.h>
+#include <iostream>
+#include <math.h>
 
 using std::cin;
 using std::cout;

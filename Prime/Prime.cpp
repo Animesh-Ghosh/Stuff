@@ -1,5 +1,5 @@
-# include <iostream>
-# include <conio.h>
+#include <iostream>
+#include <conio.h>
 
 using std::cin;
 using std::cout;

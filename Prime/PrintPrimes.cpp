@@ -1,6 +1,6 @@
-# include <iostream>
-# include <conio.h>
-# include <math.h>
+#include <iostream>
+#include <conio.h>
+#include <math.h>
 
 using std::cin;
 using std::cout;

@@ -1,5 +1,5 @@
-# include <stdio.h>
-# include  <conio.h>
+#include <stdio.h>
+#include  <conio.h>
 
 int main () {
 	printf ("-1 left-shifted once: %d\n", ((-1 >> 1)));
