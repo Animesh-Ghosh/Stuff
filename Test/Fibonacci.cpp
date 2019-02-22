@@ -4,8 +4,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-int Fibonacci (int N) {
-    static int fib[100];
+long long Fibonacci (int N) {
+    static long long fib[100];
     fib[1] = 0; fib[2] = 1;
 	if (N == 1) return fib[1];
 	else if (N == 2) return fib[2];
@@ -16,6 +16,7 @@ int Fibonacci (int N) {
 	}
 }
 
+// C++14 
 int main () {
 	int n;
 	cout << "Enter number of terms: ";
