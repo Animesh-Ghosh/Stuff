@@ -7,8 +7,6 @@ using std::endl;
 long long Fibonacci (int N) {
     static long long fib[100] = {}; // initialises the array with all elements as 0
     fib[1] = 0; fib[2] = 1;
-//	if (N == 1) return fib[1];
-//	else if (N == 2) return fib[2];
 	if (N == 1 || N == 2) return fib[N];
 	else if (fib[N] != 0) return fib[N];
 	else {
