@@ -9,5 +9,7 @@ int main () {
 		cout << (char) (x + i) << " = " << (int) (x + i) << "\t" << (char) (y + i) << " = " << (int) (y + i) << endl;
 	for (int i = 0; i < 10; i++) 
 		cout << (char) (z + i) << " = " << (int) (z + i) << endl;
+//	for (int i = 0; i < 256; i++) 
+//		cout << i << " = " << "\'" << (char) i << "\'" << endl;
 	return 0;
 }
