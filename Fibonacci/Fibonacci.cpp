@@ -1,11 +1,13 @@
 #include <iostream>
+#include <stdlib.h>
 
 using std::cin;
 using std::cout;
 using std::endl;
 
-long long Fibonacci (int N) {
-    static long long fib[100] = {}; // initialises the array with all elements as 0
+unsigned long long Fibonacci (int N) {
+    static unsigned long long fib[100] = {}; 
+    // initialises the array with all elements as 0
     fib[1] = 0; fib[2] = 1;
 	if (N == 1 || N == 2) return fib[N];
 	else if (fib[N] != 0) return fib[N];
@@ -15,11 +17,25 @@ long long Fibonacci (int N) {
 	}
 }
 
-int main () {
+int main (int argc, char const *argv[]) {
 	int n;
-	cout << "Enter number of terms: ";
-	cin >> n;
+	if (argc == 2) n = atoi (argv[1]);
+	else {
+		cout << "Enter number of terms: ";
+		cin >> n;
+	}
+	// works correctly till i = 93 for signed long long
+	// works correctly till i = 94 for unsigned long long
+	unsigned long long prev = Fibonacci (1);
+	for (int i = 1; i <= n; i++) {
+		if  (prev > Fibonacci (i)) {
+			n = i - 1;
+			break;
+		}
+		prev = Fibonacci (i);
+	}
+	cout << "First " << n << " terms of Fibonacci series: " << endl; 
 	for (int i = 1; i <= n; i++) 
-		cout << Fibonacci (i) << endl; // works correctly till i = 93
+		cout << Fibonacci (i) << endl;
 	return 0;
 }
