@@ -3,11 +3,13 @@
 #include <time.h>
 #define null NULL
 
+// linked list using triple ref
+// Original code at http://www.eprg.org/computerphile/tripref.c
+
 struct NODE {
 	int data;
 	struct NODE *next;
 };
-
 typedef struct NODE Node;
 
 Node *start = null;
