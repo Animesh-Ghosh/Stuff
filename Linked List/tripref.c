@@ -65,12 +65,12 @@ THING *start = NULL;
 
 // create new list element of type THING from the supplied text string
 THING *NewElement (char *text) {
-        THING *newp;
-        newp = (THING*) malloc (sizeof (THING));
-        newp->item = (char*) malloc (strlen (text) + 1);
-        strcpy (newp->item, text);
-        newp->next = NULL;
-        return newp;
+	THING *newp;
+	newp = (THING*) malloc (sizeof (THING));
+	newp->item = (char*) malloc (strlen (text) + 1);
+	strcpy (newp->item, text);
+	newp->next = NULL;
+	return newp;
 }  
 
 //Insert a new element into a singly-linked list
