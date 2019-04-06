@@ -10,7 +10,7 @@ struct NODE {
 	Node *next;
 };
 
-Node *head = NULL;
+Node *start = NULL;
 
 Node* CreateNode (int data)  {
 	Node *element = (Node*) malloc (sizeof (Node));
@@ -85,22 +85,22 @@ int main (int argc, char const *argv[]) {
 	printf("Generating a list of random values...\n");
 	for (i = 0; i < size; i++) {
 		value = rand () % size + 1;
-		head = Insert (head, CreateNode (value), -1);
+		start = Insert (start, CreateNode (value), -1);
 	}
 	printf("List: \n");
-	Print (head);
+	Print (start);
 	printf ("\nDeleting a node from the start of the list.\n");
-	head = Delete (head, 0);
+	start = Delete (start, 0);
 	printf("Altered list: \n");
-	Print (head);
+	Print (start);
 	printf ("\nEnter position from which element is to be deleted: ");
 	scanf ("%d", &value);
-	head = Delete (head, value);
+	start = Delete (start, value);
 	printf("Altered list: \n");
-	Print (head);
+	Print (start);
 	printf ("\nDeleting a node from the end of the list.\n");
-	head = Delete (head, -1);
+	start = Delete (start, -1);
 	printf("Altered list: \n");
-	Print (head);
+	Print (start);
 	return 0;
 }
