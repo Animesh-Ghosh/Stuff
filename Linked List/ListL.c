@@ -22,35 +22,42 @@ Node* Create (int data) {
 }
 
 void Insert (Node **head, Node* element, int position) {
-	Node **tracer = head; /* double pointer holds address of start 
-	only points to the next pointers of the list */
+	Node **tracer = head; /* double pointer, holds address of start, can hold 
+	address of next pointers of the list */
 	int counter = 0;
 	if (*head == null) {
-		*head = element; /* *head points to element or 
-		start points to element */
+		*head = element; /* *head or start holds address of element
+		(*head or start points to element) */
 	}
 	else if (position == -1) {
-		/* while next of *tracer is not null or 
-		while next of current node is not null */
+		/* while next of *tracer or next of current node is not null */
 		while ((*tracer)->next != null) {
 			tracer = &(*tracer)->next;
-			/* tracer holds address of next field of current node */
+			/* tracer holds address of next field of *tracer or current node 
+			which can be used to access next node in the list by dereferencing 
+			it once */
 			/* tracer = &(*tracer)->next; // right way
 			   *tracer = (*tracer)->next; // wrong way
 			   tracer = &((*tracer)->next); // same way */
 		}
-		/* finally, tracer holds address of next field of last node */
+		/* finally, tracer holds address of next field of node one before the 
+		last node, last node can be accessed using *tracer */
 		(*tracer)->next = element;
-		/* next of *tracer points to element or 
-		next of node holds address of element */
+		/* next of *tracer (or next of last node) points to element or 
+		next of node pointed to by next field of previous to last node holds 
+		address of element */
 	}
 	else {
 		while ((*tracer)->next != null && counter < position) {
 			tracer = &(*tracer)->next;
 			counter++;
 		}
-		element->next = (*tracer); // don't get it
-		(*tracer) = element; // this either
+		/* element's next points to the node at the specified position by 
+		accessing *tracer */
+		element->next = (*tracer);
+		/* *tracer which is the next field of a previous node (since tracer holds
+		address of next field of a previous node) points to the element */
+		(*tracer) = element;
 	}
 }
 

@@ -29,32 +29,33 @@ but the routines are also robust against the following special cases:
 3. inserting/deleting at the end of a list
 4. inserting/deleting at the front of a list 
 
-All of the above take place with no need for additional `special case' coding. The timely
-detection of NULL and the updating (if needed) of the pointer to the start of the list happen
-quite automatically.
+All of the above take place with no need for additional `special case' coding. 
+The timely detection of NULL and the updating (if needed) of the pointer to the 
+start of the list happen quite automatically.
 
-Use is made, in the routines below,  of the commonplace C shorthand of `while (*tracer)' rather than 
-the more general `while (*tracer != NULL)'. But do be clear that this short-cut relies on 
-boolean values being represented as 0 and 1 and the NULL pointer as 0. It's possible to envisage 
-exotic C implementations where this might not be the case.
+Use is made, in the routines below,  of the commonplace C shorthand of 
+`while (*tracer)' rather than the more general `while (*tracer != NULL)'. But do 
+be clear that this short-cut relies on boolean values being represented as 
+0 and 1 and the NULL pointer as 0. It's possible to envisage exotic C 
+implementations where this might not be the case.
 
 NOTE CAREFULLY: this is a tutorial example. The insertion and deletion
 routines have been deliberately constructed so as to deliver `void'. This is to
-illustrate that they do not need to deliver a formal THING * result for the purpose of 
-updating the list head (say).
+illustrate that they do not need to deliver a formal THING * result for the 
+purpose of updating the list head (say).
 
-Instead, the content of the incoming formal parameter called `head'
-points at the global variable `start' in these examples. The effect is that the content of 
-`start' gets updated, automatically and correctly, in all
-special cases where "insert at front of list" takes place. Your reaction
-to this behaviour may vary from "That's cool!" to "That's appalling!".
+Instead, the content of the incoming formal parameter called `head' points at 
+the global variable `start' in these examples. The effect is that the content of 
+`start' gets updated, automatically and correctly, in all special cases where 
+"insert at front of list" takes place. Your reaction to this behaviour may vary 
+from "That's cool!" to "That's appalling!".
 
-So, it is NOT necessary for the routines to deliver back a traditional
-THING* pointer to the new list head -- to enable updating to be done
-manually in a separate operation.  However it is easy to alter the
-InsertThing and RemoveThing routines to deliver back just such a THING*
-result, if this is required for some reason. The `return' statements in these procedures
-would then need to be replaced by `return *head' */
+So, it is NOT necessary for the routines to deliver back a traditional THING* 
+pointer to the new list head -- to enable updating to be done manually in a 
+separate operation.  However it is easy to alter the InsertThing and RemoveThing 
+routines to deliver back just such a THING* result, if this is required for some 
+reason. The `return' statements in these procedures would then need to be 
+replaced by `return *head' */
 
 typedef struct _thing { 
 	char *item;
