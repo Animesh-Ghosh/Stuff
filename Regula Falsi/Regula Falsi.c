@@ -7,6 +7,19 @@ double myPow (double a, int b) {
 	else return a * myPow (a, (b - 1));
 }
 
+// estimating lower and upper bounds for applying false position method
+void estimateBounds (double number, int root, double *lbound, double *ubound) {
+	double lower = 0, upper = 1;
+	while (1) {
+		if (myPow (lower, root) < number && number < myPow (upper, root)) 
+			break;
+		lower = upper;
+		upper += 1;
+	}
+	*lbound = lower;
+	*ubound = upper;
+}
+
 // function whose root needs to be estimated
 double func (double number1, int power, double number2) {
 	return myPow (number1, power) - number2;
@@ -35,10 +48,12 @@ int main () {
 	scanf ("%lf", &number);
 	printf ("Enter the root's order: ");
 	scanf ("%d", &root);
-	printf ("Enter the lower-bound of the interval: ");
-	scanf ("%lf", &lbound);
-	printf ("Enter the upper-bound of the interval: ");
-	scanf ("%lf", &ubound);
+	estimateBounds (number, root, &lbound, &ubound);
+	// printf ("Enter the lower-bound of the interval: ");
+	// scanf ("%lf", &lbound);
+	// printf ("Enter the upper-bound of the interval: ");
+	// scanf ("%lf", &ubound);
+	printf("Lower bound: %lf\t Upper bound: %lf\n", lbound, ubound);
 	estimate = RegulaFalsi (number, root, lbound, ubound);
 	printf ("Final estimation: %.15lf", estimate);
 	return 0;
