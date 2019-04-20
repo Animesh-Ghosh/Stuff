@@ -1,5 +1,6 @@
 #include <iostream>
-#include <process.h> // for exit ()
+#include <windows.h>
+// #include <process.h> // for exit ()
 
 //didn't use whole std namespace since the build would become bulkier
 //using namespace std;
@@ -13,6 +14,43 @@ struct NODE {
 	NODE *left;
 	NODE *right;
 };
+
+// http://www.cplusplus.com/articles/4z18T05o/#Windows
+void ClearScreen () { 
+	HANDLE                     hStdOut;
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	DWORD                      count;
+	DWORD                      cellCount;
+	COORD                      homeCoords = {0, 0};
+
+	hStdOut = GetStdHandle (STD_OUTPUT_HANDLE);
+	if (hStdOut == INVALID_HANDLE_VALUE) return;
+
+	// Get the number of cells in the current buffer
+	if (!GetConsoleScreenBufferInfo (hStdOut, &csbi)) return;
+	cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+
+	// Fill the entire buffer with spaces
+	if (!FillConsoleOutputCharacter (
+		hStdOut, 
+		(TCHAR) ' ', 
+		cellCount, 
+		homeCoords, 
+		&count)
+	) return;
+
+	// Fill the entire buffer with the current colors and attributes
+	if (!FillConsoleOutputAttribute (
+		hStdOut, 
+		csbi.wAttributes, 
+		cellCount, 
+		homeCoords, 
+		&count)
+	) return;
+
+	// Move the cursor home
+	SetConsoleCursorPosition (hStdOut, homeCoords);
+}
 
 // insert function
 // got help from a person on the internet! thank you Discord!
@@ -90,7 +128,8 @@ void Tree () {
 	cout << "Create Tree: " << endl;
 	root = Create (root);
 	do {
-		system ("cls");
+		// system ("cls");
+		ClearScreen ();
 		cout << "1.Insert\n2.Search\n3.Display\n4.Exit\n";
 		cout << "Enter choice: ";
 		cin >> ch;
@@ -118,7 +157,8 @@ void Tree () {
 				 }
 				 break;
 			case '4': cout << "Exiting..." << endl;
-				 exit (1);
+				 // exit (1);
+				return;
 			default: cout << "Invalid input!";
 		}
 		cout << "\nContinue? (Y/N): ";
