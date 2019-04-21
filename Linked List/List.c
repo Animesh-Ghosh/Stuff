@@ -12,6 +12,7 @@ struct NODE {
 
 Node *start = NULL;
 
+// function to initialise a list node
 Node* CreateNode (int data)  {
 	Node *element = (Node*) malloc (sizeof (Node));
 	element->data = data;
@@ -89,14 +90,14 @@ void List () {
 		scanf ("%d", &choice);
 		switch (choice) {
 			case 1: 
-				printf ("Enter value and position: ");
+				printf ("Enter value and position (-1 for end): ");
 				scanf ("%d %d", &value, &position);
 				start = Insert (start, CreateNode (value), position);
 				printf ("Altered list: \n");
 				Print (start);
 				break;
 			case 2: 
-				printf ("Enter position: ");
+				printf ("Enter position (-1 for end): ");
 				scanf ("%d", &position);
 				start = Delete (start, position);
 				printf ("Altered list: \n");
@@ -110,7 +111,7 @@ void List () {
 		}
 		printf ("\nContinue (Y/N)?: ");
 		// fflush (stdin);
-		while ((getchar ()) != '\n');
+		while ((getchar ()) != '\n'); // flusing the input buffer
 		scanf ("%c", &answer);
 	} while (answer == 'Y' || answer == 'y');
 }
@@ -129,6 +130,6 @@ int main (int argc, char const *argv[]) {
 	}
 	printf ("List: \n");
 	Print (start);
-	List ();
+	List (); // list menu
 	return 0;
 }
