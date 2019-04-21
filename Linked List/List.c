@@ -21,7 +21,7 @@ Node* CreateNode (int data)  {
 }
 
 Node* Insert (Node *head, Node *element, int position) {
-	Node *prev, *current = head;
+	Node *previous, *current = head;
 	int counter = 0;
 	if (head == NULL) head = element;
 	else if (position == -1) {
@@ -31,18 +31,18 @@ Node* Insert (Node *head, Node *element, int position) {
 	}
 	else {
 		while (current->next != NULL && counter < position) {
-			prev = current;
+			previous = current;
 			current = current->next;
 			counter++;
 		}
-		prev->next = element;
+		previous->next = element;
 		element->next = current;
 	}
 	return head;
 }
 
 Node* Delete (Node *head, int position) {
-	Node *prev, *current = head;
+	Node *previous, *current = head;
 	int counter = 0;
 	if (position == 0) {
 		head = head->next;
@@ -50,19 +50,19 @@ Node* Delete (Node *head, int position) {
 	}
 	else if (position == -1) {
 		while (current->next != NULL) {
-			prev = current;
+			previous = current;
 			current = current->next;
 		}
-		prev->next = NULL;
+		previous->next = NULL;
 		free (current);
 	}
 	else {
 		while (current->next != NULL && counter < position) {
-			prev = current;
+			previous = current;
 			current = current->next;
 			counter++;
 		}
-		prev->next = current->next;
+		previous->next = current->next;
 		free (current);
 	}
 	return head;
