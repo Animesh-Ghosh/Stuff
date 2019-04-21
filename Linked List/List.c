@@ -21,13 +21,9 @@ Node* CreateNode (int data)  {
 }
 
 Node* Insert (Node *head, Node *element, int position) {
-	Node *previous, *current = head;
+	Node *prev, *current = head;
 	int counter = 0;
 	if (head == NULL) head = element;
-	else if (position == 0) {
-		element->next = head;
-		head = element;
-	}
 	else if (position == -1) {
 		while (current->next != NULL) 
 			current = current->next;
@@ -35,11 +31,11 @@ Node* Insert (Node *head, Node *element, int position) {
 	}
 	else {
 		while (current->next != NULL && counter < position) {
-			previous = current;
+			prev = current;
 			current = current->next;
 			counter++;
 		}
-		previous->next = element;
+		prev->next = element;
 		element->next = current;
 	}
 	return head;
@@ -80,6 +76,7 @@ void Print (Node *head) {
 	}
 }
 
+<<<<<<< HEAD
 void List () {
 	int value, choice, position;
 	char answer = 'y';
@@ -116,6 +113,8 @@ void List () {
 	} while (answer == 'Y' || answer == 'y');
 }
 
+=======
+>>>>>>> parent of 9d2420b... Update List.c
 int main (int argc, char const *argv[]) {
 	int i, size = atoi (argv[1]), value;
 	srand (time (0));
@@ -123,13 +122,29 @@ int main (int argc, char const *argv[]) {
 		printf("Enter size of list: \n");
 		scanf ("%d", &size);
 	}
-	printf ("Generating a list of 0 indexed random values...\n");
+	printf("Generating a list of random values...\n");
 	for (i = 0; i < size; i++) {
 		value = rand () % size + 1;
 		start = Insert (start, CreateNode (value), -1);
 	}
-	printf ("List: \n");
+	printf("List: \n");
 	Print (start);
+	printf ("\nDeleting a node from the start of the list.\n");
+	start = Delete (start, 0);
+	printf("Altered list: \n");
+	Print (start);
+	printf ("\nEnter position from which element is to be deleted: ");
+	scanf ("%d", &value);
+	start = Delete (start, value);
+	printf("Altered list: \n");
+	Print (start);
+	printf ("\nDeleting a node from the end of the list.\n");
+	start = Delete (start, -1);
+	printf("Altered list: \n");
+	Print (start);
+<<<<<<< HEAD
 	List (); // list menu
+=======
+>>>>>>> parent of 9d2420b... Update List.c
 	return 0;
 }
