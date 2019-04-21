@@ -24,6 +24,10 @@ Node* Insert (Node *head, Node *element, int position) {
 	Node *previous, *current = head;
 	int counter = 0;
 	if (head == NULL) head = element;
+	else if (position == 0) {
+		element->next = head;
+		head = element;
+	}
 	else if (position == -1) {
 		while (current->next != NULL) 
 			current = current->next;
@@ -76,13 +80,12 @@ void Print (Node *head) {
 	}
 }
 
-<<<<<<< HEAD
 void List () {
 	int value, choice, position;
 	char answer = 'y';
 	printf ("\n");
 	do {
-		printf ("1. Insert into list\n2. Delete from list\n3. Print the list\n");
+		printf ("1. Insert into list\n2. Delete from list\n3. Print list\n");
 		printf ("Enter choice: ");
 		scanf ("%d", &choice);
 		switch (choice) {
@@ -113,8 +116,6 @@ void List () {
 	} while (answer == 'Y' || answer == 'y');
 }
 
-=======
->>>>>>> parent of 9d2420b... Update List.c
 int main (int argc, char const *argv[]) {
 	int i, size = atoi (argv[1]), value;
 	srand (time (0));
@@ -142,9 +143,6 @@ int main (int argc, char const *argv[]) {
 	start = Delete (start, -1);
 	printf("Altered list: \n");
 	Print (start);
-<<<<<<< HEAD
 	List (); // list menu
-=======
->>>>>>> parent of 9d2420b... Update List.c
 	return 0;
 }
