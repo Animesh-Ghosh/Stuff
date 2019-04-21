@@ -130,19 +130,6 @@ int main (int argc, char const *argv[]) {
 	}
 	printf("List: \n");
 	Print (start);
-	printf ("\nDeleting a node from the start of the list.\n");
-	start = Delete (start, 0);
-	printf("Altered list: \n");
-	Print (start);
-	printf ("\nEnter position from which element is to be deleted: ");
-	scanf ("%d", &value);
-	start = Delete (start, value);
-	printf("Altered list: \n");
-	Print (start);
-	printf ("\nDeleting a node from the end of the list.\n");
-	start = Delete (start, -1);
-	printf("Altered list: \n");
-	Print (start);
 	List (); // list menu
 	return 0;
 }
