@@ -1,5 +1,5 @@
 #include <iostream>
-#include <windows.h>
+#include "clearscreen.h"
 // #include <process.h> // for exit ()
 
 //didn't use whole std namespace since the build would become bulkier
@@ -9,82 +9,52 @@ using std::cout;
 using std::endl;
 
 // data structure
-struct NODE {
+struct Node {
 	int data;
-	NODE *left;
-	NODE *right;
+	Node *left;
+	Node *right;
 };
 
-// http://www.cplusplus.com/articles/4z18T05o/#Windows
-void ClearScreen () { 
-	HANDLE                     hStdOut;
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	DWORD                      count;
-	DWORD                      cellCount;
-	COORD                      homeCoords = {0, 0};
+Node *start = NULL;
 
-	hStdOut = GetStdHandle (STD_OUTPUT_HANDLE);
-	if (hStdOut == INVALID_HANDLE_VALUE) return;
-
-	// Get the number of cells in the current buffer
-	if (!GetConsoleScreenBufferInfo (hStdOut, &csbi)) return;
-	cellCount = csbi.dwSize.X * csbi.dwSize.Y;
-
-	// Fill the entire buffer with spaces
-	if (!FillConsoleOutputCharacter (
-		hStdOut, 
-		(TCHAR) ' ', 
-		cellCount, 
-		homeCoords, 
-		&count)
-	) return;
-
-	// Fill the entire buffer with the current colors and attributes
-	if (!FillConsoleOutputAttribute (
-		hStdOut, 
-		csbi.wAttributes, 
-		cellCount, 
-		homeCoords, 
-		&count)
-	) return;
-
-	// Move the cursor home
-	SetConsoleCursorPosition (hStdOut, homeCoords);
+Node* CreateNode (int data) {
+	Node *element = new Node;
+	element->data = data;
+	element->left = element->right = NULL;
+	return element;
 }
 
 // insert function
 // got help from a person on the internet! thank you Discord!
-NODE* Insert (NODE *root, int& data) {
+Node* Insert (Node *root, Node* element) {
 	if (root == NULL) {
-		root = new NODE;
-		root->data = data;
-		root->left = root->right = NULL;
+		root = element;
 		return root;
 	}
-	else if (data < root->data) {
-		root->left = Insert (root->left, data);
+	else if (element->data < root->data) {
+		root->left = Insert (root->left, element);
 	}
-	else if (root->data < data) {
-		root->right = Insert (root->right, data);
+	else if (root->data < element->data) {
+		root->right = Insert (root->right, element);
 	}
 }
 
 // delete function
-NODE* Delete (NODE *root, int& data) {
+Node* Delete (Node *root, int &data) {
 	// do something
 }
 
 // traverse tree
 // inorder traversal
 // made this on the first try!!! BOI!!!
-void InOrder (NODE *root) {
+void InOrder (Node *root) {
 	 if (root->left != NULL) InOrder (root->left);
 	 cout << root->data << " ";
 	 if (root->right != NULL) InOrder (root->right);
 }
 
 // preorder traversal. Thanks to BHups!
-void PreOrder (NODE *root) { 
+void PreOrder (Node *root) { 
 	cout << root->data << " ";
 	if (root->left != NULL) PreOrder (root->left);
 	if (root->right != NULL) PreOrder (root->right);
@@ -92,7 +62,7 @@ void PreOrder (NODE *root) {
 
 // search function
 // sub-function for searching
-int Exists (NODE *root, int& data) { 
+int Exists (Node *root, int &data) { 
 	if (root->data == data) return 1;
 	else if ((data < root->data) && (root->left != NULL)) Exists (root->left, data);
 	else if ((root->data < data) && (root->right != NULL)) Exists (root->right, data);
@@ -100,20 +70,20 @@ int Exists (NODE *root, int& data) {
 }
 
 // using Exists function
-void Search (NODE *root, int& data) { 
+void Search (Node *root, int &data) { 
 	if (!Exists (root, data)) cout << data << " not found!";
 	else cout << data << " found!";
 }
 
 // creating the tree
-NODE* Create (NODE *root) {
+Node* Create (Node *root) {
 	int N, data;
 	cout << "Enter number of elements to be inserted: ";
 	cin >> N;
 	cout << "Enter elements: ";
 	for (int i = 0; i < N ; i++) {
 		cin >> data;
-		root = Insert (root, data);
+		root = Insert (root, CreateNode (data));
 	}
 	cout << "Tree in IN-ORDER traversal: " << endl;
 	InOrder (root);
@@ -122,7 +92,7 @@ NODE* Create (NODE *root) {
 
 // Tree function
 void Tree () {
-	NODE *root = NULL;
+	Node *root = NULL;
 	char ans = 'Y', ch;
 	int data;
 	cout << "Create Tree: " << endl;
@@ -136,7 +106,7 @@ void Tree () {
 		switch (ch) {
 			case '1': cout << "Enter data: ";
 				 cin >> data;
-				 root = Insert (root, data);
+				 root = Insert (root, CreateNode (data));
 				 cout << "Data element inserted!";
 				 break;
 			case '2': cout << "Enter data to be searched: ";
@@ -163,11 +133,10 @@ void Tree () {
 		}
 		cout << "\nContinue? (Y/N): ";
 		cin >> ans;
-	}while (ans == 'Y' || ans == 'y');
+	} while (ans == 'Y' || ans == 'y');
 }
 
-// main
-int main () {
-	Tree (); // call to main
+int main (void) {
+	Tree ();
 	return 0;
 }
