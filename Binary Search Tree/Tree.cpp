@@ -17,6 +17,7 @@ struct Node {
 
 Node *start = NULL;
 
+// helper function
 Node* CreateNode (int data) {
 	Node *element = new Node;
 	element->data = data;
@@ -31,17 +32,34 @@ Node* Insert (Node *root, Node* element) {
 		root = element;
 		return root;
 	}
-	else if (element->data < root->data) {
+	else if (element->data < root->data) 
 		root->left = Insert (root->left, element);
-	}
-	else if (root->data < element->data) {
+	else if (root->data < element->data) 
 		root->right = Insert (root->right, element);
-	}
+	else if (root->data == element->data) 
+		return root; // repeating data elements not inserted
 }
 
 // delete function
-Node* Delete (Node *root, int &data) {
-	// do something
+Node* Delete (Node *root, Node *element) {
+	if (element->data < root->data) {
+		root->left = Delete (root->left, element);
+	}
+	else if (root->data < element->data) {
+		root->right = Delete (root->right, element);
+	}
+	else if (root->data == element->data) {
+		delete element;
+		if ((element->left == NULL) && (element->right == NULL)) 
+			return NULL;
+		else if (element->left == NULL) 
+			return root->right;
+		else if (element->right == NULL) 
+			return root->left;
+		else {
+			// if two childs
+		}
+	}
 }
 
 // traverse tree
@@ -92,47 +110,56 @@ Node* Create (Node *root) {
 
 // Tree function
 void Tree () {
-	Node *root = NULL;
-	char ans = 'Y', ch;
+	// Node *root = NULL;
 	int data;
+	char ans = 'Y', ch;
 	cout << "Create Tree: " << endl;
-	root = Create (root);
+	start = Create (start);
+	printf("\n");
 	do {
 		// system ("cls");
-		ClearScreen ();
-		cout << "1.Insert\n2.Search\n3.Display\n4.Exit\n";
+		cout << "1.Insert\n2.Delete\n3.Search\n4.Display\n5.Exit\n";
 		cout << "Enter choice: ";
 		cin >> ch;
 		switch (ch) {
 			case '1': cout << "Enter data: ";
-				 cin >> data;
-				 root = Insert (root, CreateNode (data));
-				 cout << "Data element inserted!";
-				 break;
-			case '2': cout << "Enter data to be searched: ";
-				 cin >> data;
-				 Search (root, data);
-				 break;
-			case '3': cout << "1.Pre-Order\n2.In-Order\n";
-				 cout << "Enter choice: ";
-				 cin >> ch;
-				 switch (ch) {
-				 	case '1': cout << "Tree in PRE-ORDER traversal: " << endl;
-						 PreOrder (root);
-				 		 break;
+				cin >> data;
+				start = Insert (start, CreateNode (data));
+				cout << "Data element inserted!";
+				break;
+			case '2': cout << "Enter data to be deleted: ";
+				cin >> data;
+				if (Exists (start, data)) {
+					start = Delete (start, CreateNode (data));
+					cout << "Data element deleted!";
+				}
+				else cout << "Data element not in tree. Can't delete.";
+				break;
+			case '3': cout << "Enter data to be searched: ";
+				cin >> data;
+				Search (start, data);
+				break;
+			case '4': cout << "1.Pre-Order\n2.In-Order\n";
+				cout << "Enter choice: ";
+				cin >> ch;
+				switch (ch) {
+					case '1': cout << "Tree in PRE-ORDER traversal: " << endl;
+						PreOrder (start);
+				 		break;
 					case '2': cout << "Tree in IN-ORDER traversal: " << endl;
-						InOrder (root);
+						InOrder (start);
 						break;
 		  	   		default: cout << "Invalid input!";
-				 }
-				 break;
-			case '4': cout << "Exiting..." << endl;
+				}
+				break;
+			case '5': cout << "Exiting..." << endl;
 				 // exit (1);
 				return;
 			default: cout << "Invalid input!";
 		}
 		cout << "\nContinue? (Y/N): ";
 		cin >> ans;
+		ClearScreen ();
 	} while (ans == 'Y' || ans == 'y');
 }
 
