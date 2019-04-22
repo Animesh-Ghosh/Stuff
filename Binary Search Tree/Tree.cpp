@@ -42,6 +42,7 @@ Node* Insert (Node *root, Node* element) {
 
 // delete function
 Node* Delete (Node *root, Node *element) {
+	Node *tempParent, *temp;
 	if (element->data < root->data) {
 		root->left = Delete (root->left, element);
 	}
@@ -50,14 +51,25 @@ Node* Delete (Node *root, Node *element) {
 	}
 	else if (root->data == element->data) {
 		delete element;
-		if ((element->left == NULL) && (element->right == NULL)) 
+		// no child
+		if ((root->left == NULL) && (root->right == NULL)) 
 			return NULL;
-		else if (element->left == NULL) 
-			return root->right;
-		else if (element->right == NULL) 
+		// one child
+		else if (root->left == NULL) 
+			return root->right; //
+		else if (root->right == NULL) 
 			return root->left;
-		else {
-			// if two childs
+		// if two childs
+		else { 
+			tempParent = root;
+			temp = root->left;
+			while (temp->left != NULL) {
+				tempParent = tempParent->left;
+				temp = temp->left;
+			}
+			temp = tempParent->right;
+			tempParent->right = NULL;
+			return temp;
 		}
 	}
 }
