@@ -1,8 +1,28 @@
 // www.cplusplus.com/articles/4z18T05o
-#include "clearscreen.h"
-#include <windows.h>
 
-void ClearScreen () { 
+#if defined (_WIN32) 
+	#include <windows.h>
+	#define PLATFORM "Windows"
+	winClearScreen ()
+#elif defined (__linux__)
+	#include <unistd.h>
+	#include <term.h>
+	#define PLATFORM "Linux"
+	linxClearScreen ()
+#endif
+
+#include "clearscreen.h"
+
+void linxClearScreen () {
+	int result;
+	if (!cur_term) {
+    	setupterm (NULL, STDOUT_FILENO, &result);
+    	if (result <= 0) return;
+    }
+    putp (tigetstr ("clear"));
+}
+
+void winClearScreen () { 
 	HANDLE                     hStdOut;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	DWORD                      count;
@@ -36,4 +56,11 @@ void ClearScreen () {
 
 	/* Move the cursor home */
 	SetConsoleCursorPosition (hStdOut, homeCoords);
+}
+
+void ClearScreen () {
+	if (PLATFORM == "Windows")
+		winClearScreen ();
+	else if (PLATFORM == "Linux")
+		linxClearScreen ();
 }
