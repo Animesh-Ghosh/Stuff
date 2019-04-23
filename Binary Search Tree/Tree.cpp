@@ -41,8 +41,10 @@ Node* Insert (Node *root, Node* element) {
 }
 
 // delete function
+// no one helped me :'( except the video specified below
+// https://www.youtube.com/watch?v=wcIRPqTR3Kc
 Node* Delete (Node *root, Node *element) {
-	Node *tempParent, *temp;
+	Node *tempParent, *temp, *left, *right;
 	if (element->data < root->data) {
 		root->left = Delete (root->left, element);
 	}
@@ -62,13 +64,18 @@ Node* Delete (Node *root, Node *element) {
 		// if two childs
 		else { 
 			tempParent = root;
+			left = tempParent->left;
+			right = tempParent->right;
 			temp = root->left;
 			while (temp->left != NULL) {
 				tempParent = tempParent->left;
 				temp = temp->left;
 			}
 			temp = tempParent->right;
+			temp->left = left;
+			temp->right = right;
 			tempParent->right = NULL;
+			delete (tempParent->right);
 			return temp;
 		}
 	}
