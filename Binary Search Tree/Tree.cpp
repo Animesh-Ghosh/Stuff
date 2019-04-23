@@ -1,5 +1,5 @@
 #include <iostream>
-#include "clearscreen.h"
+#include "../ClearScreen/clearscreen.h"
 // #include <process.h> // for exit ()
 
 //didn't use whole std namespace since the build would become bulkier
