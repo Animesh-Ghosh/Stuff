@@ -5,26 +5,26 @@
 /* Determination a platform of an operation system
     Fully supported supported only GNU GCC/G++, partially on Clang/LLVM */
 
-#if defined(_WIN32)
+#if defined (_WIN32)
     #define PLATFORM_NAME "windows" // Windows
-#elif defined(_WIN64)
+#elif defined (_WIN64)
     #define PLATFORM_NAME "windows" // Windows
-#elif defined(__CYGWIN__) && !defined(_WIN32)
+#elif defined (__CYGWIN__) && !defined(_WIN32)
     #define PLATFORM_NAME "windows" // Windows (Cygwin POSIX under Microsoft Window)
-#elif defined(__ANDROID__)
+#elif defined (__ANDROID__)
     #define PLATFORM_NAME "android" // Android (implies Linux, so it must come first)
-#elif defined(__linux__)
+#elif defined (__linux__)
     #define PLATFORM_NAME "linux" // Debian, Ubuntu, Gentoo, Fedora, openSUSE, RedHat, Centos and other
-#elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
+#elif defined (__unix__) || defined (__APPLE__) && defined (__MACH__)
     #include <sys/param.h>
-    #if defined(BSD)
+    #if defined (BSD)
         #define PLATFORM_NAME "bsd" // FreeBSD, NetBSD, OpenBSD, DragonFly BSD
     #endif
-#elif defined(__hpux)
+#elif defined (__hpux)
     #define PLATFORM_NAME "hp-ux" // HP-UX
-#elif defined(_AIX)
+#elif defined (_AIX)
     #define PLATFORM_NAME "aix" // IBM AIX
-#elif defined(__APPLE__) && defined(__MACH__) // Apple OSX and iOS (Darwin)
+#elif defined (__APPLE__) && defined (__MACH__) // Apple OSX and iOS (Darwin)
     #include <TargetConditionals.h>
     #if TARGET_IPHONE_SIMULATOR == 1
         #define PLATFORM_NAME "ios" // Apple iOS
@@ -33,21 +33,20 @@
     #elif TARGET_OS_MAC == 1
         #define PLATFORM_NAME "osx" // Apple OSX
     #endif
-#elif defined(__sun) && defined(__SVR4)
+#elif defined (__sun) && defined (__SVR4)
     #define PLATFORM_NAME "solaris" // Oracle Solaris, Open Indiana
 #else
     #define PLATFORM_NAME NULL
 #endif
 
 // Return a name of platform, if determined, otherwise - an empty string
-char *
-get_platform_name() {
+char* get_platform_name() {
     return (PLATFORM_NAME == NULL) ? "" : PLATFORM_NAME;
 }
 
 int main(int argc, char *argv[]) {
     char c;
-    puts(get_platform_name());
+    puts (get_platform_name ());
     getchar (); // to pause the console
     return 0;
 }

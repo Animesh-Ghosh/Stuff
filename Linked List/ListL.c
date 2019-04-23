@@ -79,7 +79,7 @@ int main (int argc, char const *argv[]) {
 	}
 	printf("Generating a list of random values...\n");
 	for (i = 0; i < size; i++) {
-		current = Create (i);
+		current = Create (rand () % size + 1);
 		Insert (&start, current, -1); // passing start by "reference"
 		// printf ("%p\n", current);
 	}
