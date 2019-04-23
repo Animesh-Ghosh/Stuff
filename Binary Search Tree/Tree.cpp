@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../ClearScreen/clearscreen.h" // can be removed
+#include "../ClearScreen/clearscreen.h" // optional
 
 using namespace std;
 
@@ -25,13 +25,10 @@ Node* CreateNode (int data) {
 Node* Insert (Node *root, Node* element) {
 	if (root == NULL) 
 		root = element;
-		// return root;
 	else if (element->data < root->data) 
 		root->left = Insert (root->left, element);
 	else if (root->data < element->data) 
 		root->right = Insert (root->right, element);
-	// else if (root->data == element->data) 
-	// 	return root; // repeating data elements not inserted
 	return root;
 }
 
@@ -40,24 +37,19 @@ Node* Insert (Node *root, Node* element) {
 // https://www.youtube.com/watch?v=wcIRPqTR3Kc
 Node* Delete (Node *root, Node *element) {
 	Node *tempParent, *temp, *left, *right;
-	if (element->data < root->data) {
+	if (element->data < root->data) 
 		root->left = Delete (root->left, element);
-	}
-	else if (root->data < element->data) {
+	else if (root->data < element->data) 
 		root->right = Delete (root->right, element);
-	}
 	else if (root->data == element->data) {
 		delete element;
-		// no child
 		if ((root->left == NULL) && (root->right == NULL)) 
-			return NULL;
-		// one child
-		else if (root->left == NULL) 
-			return root->right; //
+			return NULL; // no child nodes
+		else if (root->left == NULL) // one child node
+			return root->right;
 		else if (root->right == NULL) 
 			return root->left;
-		// if two childs still not working
-		else { 
+		else { // two child node (still not working)
 			tempParent = root;
 			left = tempParent->left;
 			right = tempParent->right;
@@ -120,7 +112,7 @@ void Search (Node *root, int data) {
 	else cout << data << " found!";
 }
 
-// creating the tree
+// function to initialise the tree
 Node* Create (Node *root) {
 	int N, data;
 	cout << "Enter number of elements to be inserted: ";
@@ -130,21 +122,18 @@ Node* Create (Node *root) {
 		cin >> data;
 		root = Insert (root, CreateNode (data));
 	}
-	cout << "Tree in IN-ORDER traversal: " << endl;
-	InOrder (root);
+	Print (2);
 	return root;
 }
 
 // Tree function
 void Tree () {
-	// Node *root = NULL;
 	int data;
 	char ans = 'Y', ch;
 	cout << "Create Tree: " << endl;
 	start = Create (start);
 	printf("\n");
 	do {
-		// system ("cls");
 		cout << "1.Insert\n2.Delete\n3.Search\n4.Display\n5.Exit\n";
 		cout << "Enter choice: ";
 		cin >> ch;
@@ -160,7 +149,7 @@ void Tree () {
 					start = Delete (start, CreateNode (data));
 					cout << "Data element deleted!";
 				}
-				else cout << "Data element not in tree. Can't delete.";
+				else cout << data << " not in tree. Can't delete.";
 				break;
 			case '3': cout << "Enter data to be searched: ";
 				cin >> data;
