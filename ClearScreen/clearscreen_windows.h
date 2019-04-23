@@ -1,6 +1,8 @@
+// http://www.cplusplus.com/articles/4z18T05o/#Windows
+
 #include <windows.h>
 
-void __ClearScreen_PLATFORM () { 
+inline void ClearScreen () { 
 	HANDLE                     hStdOut;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	DWORD                      count;

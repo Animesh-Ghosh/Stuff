@@ -3,7 +3,10 @@
 #ifndef CLEARSCREEN_H
 	#define CLEARSCREEN_H
 
-	void ClearScreen();
+	// inline to avoid linking errors
+	/* allows this definition to be defined in 
+	multiple translation units (whatever that means) */
+	inline void ClearScreen();
 
 	#if defined (_WIN32) 
 
@@ -17,8 +20,4 @@
 
 	#endif
 
-#endif 
-
-void ClearScreen () {
-	__ClearScreen_PLATFORM ();
-}
+#endif
