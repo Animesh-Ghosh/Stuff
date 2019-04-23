@@ -1,12 +1,7 @@
 #include <iostream>
-#include "../ClearScreen/clearscreen.h"
-// #include <process.h> // for exit ()
+#include "../ClearScreen/clearscreen.h" // can be removed
 
-//didn't use whole std namespace since the build would become bulkier
-//using namespace std;
-using std::cin;
-using std::cout;
-using std::endl;
+using namespace std;
 
 // data structure
 struct Node {
@@ -17,7 +12,7 @@ struct Node {
 
 Node *start = NULL;
 
-// helper function
+// helper function to create node element
 Node* CreateNode (int data) {
 	Node *element = new Node;
 	element->data = data;
@@ -28,16 +23,16 @@ Node* CreateNode (int data) {
 // insert function
 // got help from a person on the internet! thank you Discord!
 Node* Insert (Node *root, Node* element) {
-	if (root == NULL) {
+	if (root == NULL) 
 		root = element;
-		return root;
-	}
+		// return root;
 	else if (element->data < root->data) 
 		root->left = Insert (root->left, element);
 	else if (root->data < element->data) 
 		root->right = Insert (root->right, element);
-	else if (root->data == element->data) 
-		return root; // repeating data elements not inserted
+	// else if (root->data == element->data) 
+	// 	return root; // repeating data elements not inserted
+	return root;
 }
 
 // delete function
@@ -61,24 +56,25 @@ Node* Delete (Node *root, Node *element) {
 			return root->right; //
 		else if (root->right == NULL) 
 			return root->left;
-		// if two childs
+		// if two childs still not working
 		else { 
 			tempParent = root;
 			left = tempParent->left;
 			right = tempParent->right;
-			temp = root->left;
-			while (temp->left != NULL) {
-				tempParent = tempParent->left;
-				temp = temp->left;
+			temp = root->right;
+			while (temp->right != NULL) {
+				tempParent = temp;
+				temp = temp->right;
 			}
-			temp = tempParent->right;
+			temp = tempParent->left;
 			temp->left = left;
 			temp->right = right;
-			tempParent->right = NULL;
-			delete (tempParent->right);
+			tempParent->left = NULL;
+			delete (tempParent->left);
 			return temp;
 		}
 	}
+	return root;
 }
 
 // traverse tree
@@ -97,17 +93,29 @@ void PreOrder (Node *root) {
 	if (root->right != NULL) PreOrder (root->right);
 }
 
-// search function
+// wrapping inorder, preorder printing
+void Print (int order) {
+	switch (order) {
+		case '1': cout << "Tree in PRE-ORDER traversal: " << endl;
+			PreOrder (start);
+			break;
+		case '2': cout << "Tree in IN-ORDER traversal: " << endl;
+			InOrder (start);
+			break;
+		default: cout << "Invalid input!";
+	}
+}
+
 // sub-function for searching
-int Exists (Node *root, int &data) { 
+int Exists (Node *root, int data) { 
 	if (root->data == data) return 1;
-	else if ((data < root->data) && (root->left != NULL)) Exists (root->left, data);
-	else if ((root->data < data) && (root->right != NULL)) Exists (root->right, data);
+	else if ((data < root->data) && (root->left != NULL)) return Exists (root->left, data);
+	else if ((root->data < data) && (root->right != NULL)) return Exists (root->right, data);
 	else return 0;
 }
 
-// using Exists function
-void Search (Node *root, int &data) { 
+// search function using Exists function
+void Search (Node *root, int data) { 
 	if (!Exists (root, data)) cout << data << " not found!";
 	else cout << data << " found!";
 }
@@ -161,19 +169,10 @@ void Tree () {
 			case '4': cout << "1.Pre-Order\n2.In-Order\n";
 				cout << "Enter choice: ";
 				cin >> ch;
-				switch (ch) {
-					case '1': cout << "Tree in PRE-ORDER traversal: " << endl;
-						PreOrder (start);
-				 		break;
-					case '2': cout << "Tree in IN-ORDER traversal: " << endl;
-						InOrder (start);
-						break;
-		  	   		default: cout << "Invalid input!";
-				}
+				Print (ch);
 				break;
 			case '5': cout << "Exiting..." << endl;
-				 // exit (1);
-				return;
+				return; // exit (1);
 			default: cout << "Invalid input!";
 		}
 		cout << "\nContinue? (Y/N): ";

@@ -3,6 +3,7 @@
 #ifndef CLEARSCREEN_H
 	#define CLEARSCREEN_H
 
+	// lot's of help from Discord!
 	// inline to avoid linking errors
 	/* allows this definition to be defined in 
 	multiple translation units (whatever that means) */
