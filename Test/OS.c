@@ -2,10 +2,8 @@
 
 #include <stdio.h>
 
-/**
- * Determination a platform of an operation system
- * Fully supported supported only GNU GCC/G++, partially on Clang/LLVM
- */
+/* Determination a platform of an operation system
+    Fully supported supported only GNU GCC/G++, partially on Clang/LLVM */
 
 #if defined(_WIN32)
     #define PLATFORM_NAME "windows" // Windows
@@ -50,6 +48,6 @@ get_platform_name() {
 int main(int argc, char *argv[]) {
     char c;
     puts(get_platform_name());
-    getchar ();
+    getchar (); // to pause the console
     return 0;
 }

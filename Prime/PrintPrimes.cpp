@@ -1,10 +1,7 @@
 #include <iostream>
-#include <conio.h>
-#include <math.h>
+#include <cmath>
 
-using std::cin;
-using std::cout;
-using std::endl;
+using namespace std;
 
 void Generate (int List[], int N) {
 	for (int i = 0; i < N; i++) List[i] = i;
@@ -51,6 +48,5 @@ int main () {
 	cin >> x >> y;
 	cout << "Primes in the range [" << x << ", " << y << "]: " << endl;
 	PrintPrimes (x, y);
-	getch ();
 	return 0;
 }

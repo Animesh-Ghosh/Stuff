@@ -1,5 +1,4 @@
 #include <iostream>
-#include "../ClearScreen/clearscreen.h" // optional
 
 using namespace std;
 
@@ -73,9 +72,9 @@ Node* Delete (Node *root, Node *element) {
 // inorder traversal
 // made this on the first try!!! BOI!!!
 void InOrder (Node *root) {
-	 if (root->left != NULL) InOrder (root->left);
-	 cout << root->data << " ";
-	 if (root->right != NULL) InOrder (root->right);
+	if (root->left != NULL) InOrder (root->left);
+	cout << root->data << " ";
+	if (root->right != NULL) InOrder (root->right);
 }
 
 // preorder traversal. Thanks to BHups!
@@ -101,8 +100,10 @@ void Print (int order) {
 // sub-function for searching
 int Exists (Node *root, int data) { 
 	if (root->data == data) return 1;
-	else if ((data < root->data) && (root->left != NULL)) return Exists (root->left, data);
-	else if ((root->data < data) && (root->right != NULL)) return Exists (root->right, data);
+	else if ((data < root->data) && (root->left != NULL)) 
+		return Exists (root->left, data);
+	else if ((root->data < data) && (root->right != NULL)) 
+		return Exists (root->right, data);
 	else return 0;
 }
 
@@ -166,7 +167,6 @@ void Tree () {
 		}
 		cout << "\nContinue? (Y/N): ";
 		cin >> ans;
-		ClearScreen ();
 	} while (ans == 'Y' || ans == 'y');
 }
 

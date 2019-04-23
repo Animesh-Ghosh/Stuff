@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <conio.h>
 #include <math.h>
 #define MAXSIZE 5  //size of matrix can be changed from here
 
@@ -14,7 +13,6 @@ int main () {
 	Enter (A, size);
 	det = detA (A, size);
 	printf ("%d", det);
-	getch ();
 	return 0;
 }
 

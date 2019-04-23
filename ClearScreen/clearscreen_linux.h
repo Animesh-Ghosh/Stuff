@@ -1,5 +1,4 @@
 // http://www.cplusplus.com/articles/4z18T05o/#POSIX
-
 #include <unistd.h>
 #include <term.h>
 

@@ -7,7 +7,7 @@
 	PRIME1 - Prime Generator
 	status - accepted
 */
- 
+
 int primality(int n) {
 	if(n<=1)
 		return false;
@@ -24,8 +24,7 @@ int primality(int n) {
 	}
 	return true;
 }
- 
- 
+
 int main() {
 	int s,n,i,t;
 	scanf("%d",&t);
@@ -41,4 +40,4 @@ int main() {
 	}
 	printf("\n");
 	return 0;
-} 
+}

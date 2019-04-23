@@ -1,9 +1,6 @@
 #include <iostream>
-#include <conio.h>
 
-using std::cin;
-using std::cout;
-using std::endl;
+using namespace std;
 
 int BinSearch (int &val, int Ar[], int N) {
 	int low = 0, high = N - 1, mid, flag = 0;
@@ -102,6 +99,5 @@ int main () {
 	int x;
 	cin >> x;
 	Prime (x);
-	getch ();
 	return 0;
 }

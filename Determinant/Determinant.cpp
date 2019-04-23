@@ -1,9 +1,7 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
-using std::cin;
-using std::cout;
-using std::endl;
+using namespace std;
 
 void Enter (int**, int&);
 void Minor (int**, int**, int, int, int&);

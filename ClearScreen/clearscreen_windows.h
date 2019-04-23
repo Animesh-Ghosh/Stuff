@@ -1,5 +1,4 @@
 // http://www.cplusplus.com/articles/4z18T05o/#Windows
-
 #include <windows.h>
 
 inline void ClearScreen () { 
