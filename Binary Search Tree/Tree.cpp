@@ -35,7 +35,7 @@ Node* Insert (Node *root, Node* element) {
 // no one helped me :'( except the video specified below
 // https://www.youtube.com/watch?v=wcIRPqTR3Kc
 Node* Delete (Node *root, Node *element) {
-	Node *tempParent, *tempChild;
+	Node *temp;
 	if (element->data < root->data) 
 		root->left = Delete (root->left, element);
 	else if (root->data < element->data) 
@@ -48,15 +48,13 @@ Node* Delete (Node *root, Node *element) {
 		else if (root->right == NULL) 
 			root = root->left;
 		else { // two child node (still not working)
-			tempParent = root;
-			tempChild = root->right;
-			while (tempChild->left != NULL) {
-				tempParent = tempChild;
-				tempChild = tempChild->left;
+			temp = root->right;
+			while (temp->left != NULL) {
+				temp = temp->left;
 			}
-			tempParent->right = Delete (tempParent->right, tempChild);
-			tempChild->left = root->left; tempChild->right = root->right;
-			root = tempChild;
+			// temp->left = root->left; temp->right = root->right;
+			root->data = temp->data;
+			root->right = Delete (root->right, temp);
 		}
 		delete element;
 	}
