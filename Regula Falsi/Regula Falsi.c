@@ -49,10 +49,6 @@ int main () {
 	printf ("Enter the root's order: ");
 	scanf ("%d", &root);
 	estimateBounds (number, root, &lbound, &ubound);
-	// printf ("Enter the lower-bound of the interval: ");
-	// scanf ("%lf", &lbound);
-	// printf ("Enter the upper-bound of the interval: ");
-	// scanf ("%lf", &ubound);
 	printf("Lower bound: %lf\t Upper bound: %lf\n", lbound, ubound);
 	estimate = RegulaFalsi (number, root, lbound, ubound);
 	printf ("Final estimation: %.15lf", estimate);

@@ -55,6 +55,7 @@ Node* Delete (Node *root, Node *element) {
 				tempChild = tempChild->left;
 			}
 			// code that does something correct
+			tempParent->left = Delete (tempParent->left, tempChild);
 			tempChild->left = root->left; tempChild->right = root->right;
 			root = tempChild;
 		}
