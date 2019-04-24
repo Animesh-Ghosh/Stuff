@@ -35,36 +35,32 @@ Node* Insert (Node *root, Node* element) {
 // no one helped me :'( except the video specified below
 // https://www.youtube.com/watch?v=wcIRPqTR3Kc
 Node* Delete (Node *root, Node *element) {
-	Node *tempParent, *temp, *left, *right;
+	Node *tempParent, *tempChild, *tempLeft, *tempRight;
 	if (element->data < root->data) 
 		root->left = Delete (root->left, element);
 	else if (root->data < element->data) 
 		root->right = Delete (root->right, element);
 	else if (root->data == element->data) {
-		delete element;
 		if ((root->left == NULL) && (root->right == NULL)) 
-			return NULL; // no child nodes
+			root = NULL; // no child nodes
 		else if (root->left == NULL) // one child node
-			return root->right;
+			root = root->right;
 		else if (root->right == NULL) 
-			return root->left;
+			root = root->left;
 		else { // two child node (still not working)
 			tempParent = root;
-			left = tempParent->left;
-			right = tempParent->right;
-			temp = root->right;
-			while (temp->right != NULL) {
-				tempParent = temp;
-				temp = temp->right;
+			tempChild = root->right;
+			tempLeft = root->left; tempRight = root->right;
+			while (tempChild->left != NULL) {
+				tempParent = tempChild;
+				tempChild = tempChild->left;
 			}
-			temp = tempParent->left;
-			temp->left = left;
-			temp->right = right;
-			tempParent->left = NULL;
-			delete (tempParent->left);
-			return temp;
+			tempParent->right = Delete (tempParent, tempChild);
+			tempChild->left = tempLeft; tempChild->right = tempRight;
+			root = tempChild;
 		}
 	}
+	delete element;
 	return root;
 }
 
@@ -85,13 +81,13 @@ void PreOrder (Node *root) {
 }
 
 // wrapping inorder, preorder printing
-void Print (int order) {
-	switch (order) {
-		case '1': cout << "Tree in PRE-ORDER traversal: " << endl;
-			PreOrder (start);
+void Print (Node *root, int choice) {
+	switch (choice) {
+		case 1: cout << "Tree in PRE-ORDER traversal: " << endl;
+			PreOrder (root);
 			break;
-		case '2': cout << "Tree in IN-ORDER traversal: " << endl;
-			InOrder (start);
+		case 2: cout << "Tree in IN-ORDER traversal: " << endl;
+			InOrder (root);
 			break;
 		default: cout << "Invalid input!";
 	}
@@ -123,28 +119,28 @@ Node* Create (Node *root) {
 		cin >> data;
 		root = Insert (root, CreateNode (data));
 	}
-	Print (2);
+	Print (root, 2);
 	return root;
 }
 
 // Tree function
 void Tree () {
-	int data;
-	char ans = 'Y', ch;
+	int data, choice;
+	char ans = 'Y';
 	cout << "Create Tree: " << endl;
 	start = Create (start);
 	printf("\n");
 	do {
-		cout << "1.Insert\n2.Delete\n3.Search\n4.Display\n5.Exit\n";
+		cout << "1.Insert\n2.Delete\n3.Search\n4.Display\n5.Exit" << endl;
 		cout << "Enter choice: ";
-		cin >> ch;
-		switch (ch) {
-			case '1': cout << "Enter data: ";
+		cin >> choice;
+		switch (choice) {
+			case 1: cout << "Enter data: ";
 				cin >> data;
 				start = Insert (start, CreateNode (data));
 				cout << "Data element inserted!";
 				break;
-			case '2': cout << "Enter data to be deleted: ";
+			case 2: cout << "Enter data to be deleted: ";
 				cin >> data;
 				if (Exists (start, data)) {
 					start = Delete (start, CreateNode (data));
@@ -152,20 +148,20 @@ void Tree () {
 				}
 				else cout << data << " not in tree. Can't delete.";
 				break;
-			case '3': cout << "Enter data to be searched: ";
+			case 3: cout << "Enter data to be searched: ";
 				cin >> data;
 				Search (start, data);
 				break;
-			case '4': cout << "1.Pre-Order\n2.In-Order\n";
+			case 4: cout << "1.Pre-Order\n2.In-Order" << endl;
 				cout << "Enter choice: ";
-				cin >> ch;
-				Print (ch);
+				cin >> choice;
+				Print (start, choice);
 				break;
-			case '5': cout << "Exiting..." << endl;
+			case 5: cout << "Exiting..." << endl;
 				return; // exit (1);
-			default: cout << "Invalid input!";
+			default: cout << "Invalid input!" << endl;
 		}
-		cout << "\nContinue? (Y/N): ";
+		cout << "Continue? (Y/N): ";
 		cin >> ans;
 	} while (ans == 'Y' || ans == 'y');
 }
