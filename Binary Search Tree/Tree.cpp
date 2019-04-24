@@ -34,6 +34,9 @@ Node* Insert (Node *root, Node* element) {
 // delete function
 // no one helped me :'( except the video specified below
 // https://www.youtube.com/watch?v=wcIRPqTR3Kc
+// and amitbansal7 with his repo:
+// https://github.com/amitbansal7/Data-Structures-and-Algorithms/blob/master
+// /7.Binary-Search-Tree/BinarySearchTree.c
 Node* Delete (Node *root, Node *element) {
 	Node *temp;
 	if (element->data < root->data) 
