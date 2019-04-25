@@ -49,7 +49,7 @@ Node* Delete (Node *root, Node *element) {
 			root = root->right;
 		else if (root->right == NULL) 
 			root = root->left;
-		else { // two child node (still not working)
+		else { // two child node
 			temp = root->right;
 			while (temp->left != NULL) {
 				temp = temp->left;
