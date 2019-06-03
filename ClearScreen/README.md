@@ -29,13 +29,13 @@
 		
 	- Compile using ``-lncurses`` or ``-lterminfo`` flag:
      
-	 	``gcc test.c clearscreen.c -lncurses -o test`` **or**,
+	 	``gcc test.c "ClearScreen/clearscreen.c" -lncurses -o test`` **or**,
     	
-		``gcc test.c clearscreen.c -lterminfo -o test``
+		``gcc test.c "clearscreen.c" -lterminfo -o test``
 	
 	b. Windows:-
 	
-	``gcc test.c clearscreen.c -o test``
+	``gcc test.c "ClearScreen\clearscreen.c" -o test``
  
 ## How it works
 
