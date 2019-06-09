@@ -22,11 +22,11 @@ Node* CreateNode (int data) {
 // insert function
 // got help from a person on the internet! thank you Discord!
 Node* Insert (Node *root, Node* element) {
-	if (root == NULL) 
+	if (root == NULL)
 		root = element;
-	else if (element->data < root->data) 
+	else if (element->data < root->data)
 		root->left = Insert (root->left, element);
-	else if (root->data < element->data) 
+	else if (root->data < element->data)
 		root->right = Insert (root->right, element);
 	return root;
 }
@@ -38,16 +38,16 @@ Node* Insert (Node *root, Node* element) {
 // https://github.com/amitbansal7/Data-Structures-and-Algorithms/blob/master/7.Binary-Search-Tree/BinarySearchTree.c
 Node* Delete (Node *root, Node *element) {
 	Node *temp;
-	if (element->data < root->data) 
+	if (element->data < root->data)
 		root->left = Delete (root->left, element);
-	else if (root->data < element->data) 
+	else if (root->data < element->data)
 		root->right = Delete (root->right, element);
 	else if (root->data == element->data) {
-		if ((root->left == NULL) && (root->right == NULL)) 
+		if ((root->left == NULL) && (root->right == NULL))
 			root = NULL; // no child nodes
 		else if (root->left == NULL) // one child node
 			root = root->right;
-		else if (root->right == NULL) 
+		else if (root->right == NULL)
 			root = root->left;
 		else { // two child node
 			temp = root->right;
@@ -73,14 +73,14 @@ void InOrder (Node *root) {
 }
 
 // preorder traversal. Thanks to BHups!
-void PreOrder (Node *root) { 
+void PreOrder (Node *root) {
 	cout << root->data << " ";
 	if (root->left != NULL) PreOrder (root->left);
 	if (root->right != NULL) PreOrder (root->right);
 }
 
 // wrapping inorder, preorder printing
-void Print (Node *root) { 
+void Print (Node *root) {
 	cout << "Tree in PRE-ORDER traversal: " << endl;
 	PreOrder (root);
 	cout << "\nTree in IN-ORDER traversal: " << endl;
@@ -89,17 +89,17 @@ void Print (Node *root) {
 }
 
 // sub-function for searching
-int Exists (Node *root, int data) { 
+int Exists (Node *root, int data) {
 	if (root->data == data) return 1;
-	else if ((data < root->data) && (root->left != NULL)) 
+	else if ((data < root->data) && (root->left != NULL))
 		return Exists (root->left, data);
-	else if ((root->data < data) && (root->right != NULL)) 
+	else if ((root->data < data) && (root->right != NULL))
 		return Exists (root->right, data);
 	else return 0;
 }
 
 // search function using Exists function
-void Search (Node *root, int data) { 
+void Search (Node *root, int data) {
 	if (!Exists (root, data)) cout << data << " not found!" << endl;
 	else cout << data << " found!" << endl;
 }
