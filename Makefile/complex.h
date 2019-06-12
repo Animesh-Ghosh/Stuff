@@ -5,10 +5,11 @@
 	private:
 		double a, b;
 	public:
-		Complex () { a = 0; b = 0; }
+		Complex (): a(0), b(0) {}
 		Complex (double a, double b): a (a), b (b) {}
 		void setValue ();
 		void printComplex ();
+		Complex operator + (Complex&);
 	};
 
 #endif

@@ -15,3 +15,10 @@ void Complex::printComplex () {
 	if (b < 0) cout << a << " - i" << ((-1) * b) << endl;
 	else cout << a << " + i" << b << endl;
 }
+
+Complex Complex::operator + (Complex &c) {
+	Complex temp;
+	temp.a = this->a + c.a;
+	temp.b = this->b + c.b;
+	return temp;
+}
