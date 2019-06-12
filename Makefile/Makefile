@@ -1,18 +1,26 @@
-C++ = g++
-TARGET = "Complex"
+# variables
+CXX      = g++
+TARGET   = "Complex"
+OBJS     = main.o complex.o
 LINKFLGS = -c
 COMPFLGS = -o
+RM       = del /p *.o *.exe
 
-# target: dependency
-$(TARGET): main.o complex.o
-	$(C++) main.o complex.o $(COMPFLGS) $(TARGET)
+# target: prerequisites
+$(TARGET): $(OBJS)
+	@echo Linking $(OBJS) # recipe echoing
+	$(CXX) $(TARGET) $(OBJS) -o
 
 main.o: main.cpp
-	$(C++) main.cpp $(LINKFLGS)
+	@echo Compiling main
+	$(CXX) main.cpp -c
 
 complex.o: complex.cpp
-	$(C++) complex.cpp $(LINKFLGS)
+	@echo Compiling complex
+	$(CXX) complex.cpp -c
 
-# using Windows commands, may be changed for other OSs appropriately
+# clean using Windows commands, may be changed for other OSs appropriately
+# del /p *.o *.exe
 clean:
-	del /q *.o *.exe
+	@echo Cleaning up $(TARGET), $(OBJS)
+	$(RM)
