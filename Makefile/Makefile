@@ -4,15 +4,15 @@ LINKFLGS = -c
 COMPFLGS = -o
 
 # target: dependency
-$(TARGET): main.o Complex.o
-	$(C++) main.o Complex.o $(COMPFLGS) $(TARGET)
+$(TARGET): main.o complex.o
+	$(C++) main.o complex.o $(COMPFLGS) $(TARGET)
 
 main.o: main.cpp
 	$(C++) main.cpp $(LINKFLGS)
 
-Complex.o: Complex.cpp
-	$(C++) Complex.cpp $(LINKFLGS)
+complex.o: complex.cpp
+	$(C++) complex.cpp $(LINKFLGS)
 
 # using Windows commands, may be changed for other OSs appropriately
 clean:
-	del /q *.o
+	del /q *.o *.exe
