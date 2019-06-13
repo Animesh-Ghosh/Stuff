@@ -1,6 +1,6 @@
 # variables
 CXX      = g++
-TARGET   = "Complex"
+TARGET   = Complex
 OBJS     = main.o complex.o
 
 # target: prerequisites
@@ -20,5 +20,5 @@ complex.o: complex.cpp
 # clean using Windows commands, may be changed for other OSs appropriately
 
 clean:
-	@echo Cleaning up $(TARGET), $(OBJS)
+	@echo Cleaning up $(TARGET), $(OBJS).
 	@del /p *.o *.exe

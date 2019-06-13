@@ -12,7 +12,8 @@ void Complex::setValue () {
 }
 
 void Complex::printComplex () {
-	if (b < 0) cout << a << " - i" << ((-1) * b) << endl;
+	if (b == 0) cout << a << " + i0" << endl;
+	else if (b < 0) cout << a << " - i" << ((-1) * b) << endl;
 	else cout << a << " + i" << b << endl;
 }
 
