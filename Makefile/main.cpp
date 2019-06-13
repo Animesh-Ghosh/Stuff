@@ -5,6 +5,7 @@ using namespace std;
 
 int main (void) {
 	Complex c1, c2 (3, -5), c3;
+	cout << "Program start." << endl;
 	c1.setValue ();
 	cout << "Complex number c1: ";
 	c1.printComplex ();
@@ -14,5 +15,6 @@ int main (void) {
 	c3 = c1 + c2;
 	cout << "c1 + c2 = ";
 	c3.printComplex ();
+	cout << "Program end." << endl;
 	return 0;
 }

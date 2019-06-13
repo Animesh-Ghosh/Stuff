@@ -1,7 +1,8 @@
 # variables
 CXX      = g++
-TARGET   = Complex
+TARGET   = complex
 OBJS     = main.o complex.o
+FILES    = main.cpp complex.cpp
 
 # target: prerequisites
 # recipe echoing
@@ -9,16 +10,13 @@ $(TARGET): $(OBJS)
 	@echo Linking $(OBJS) together.
 	@$(CXX) $(OBJS) -o $(TARGET)
 
-main.o: main.cpp
-	@echo Compiling main.
+$(OBJS): $(FILES)
+	@echo Compiling $(FILES) into object files.
 	@$(CXX) main.cpp -c
-
-complex.o: complex.cpp
-	@echo Compiling complex.
 	@$(CXX) complex.cpp -c
 
 # clean using Windows commands, may be changed for other OSs appropriately
 
 clean:
-	@echo Cleaning up $(TARGET), $(OBJS).
+	@echo Cleaning up $(OBJS) and $(TARGET).
 	@del /p *.o *.exe
