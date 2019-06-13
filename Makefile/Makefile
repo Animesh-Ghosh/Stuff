@@ -16,7 +16,6 @@ $(OBJS): $(FILES)
 	@$(CXX) complex.cpp -c
 
 # clean using Windows commands, may be changed for other OSs appropriately
-
 clean:
 	@echo Cleaning up $(OBJS) and $(TARGET).
 	@del /p *.o *.exe
